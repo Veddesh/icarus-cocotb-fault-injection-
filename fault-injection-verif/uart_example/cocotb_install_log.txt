@@ -1,0 +1,8 @@
+Using pip 22.0.2 from /home/admin/project/fault-injection-verif/uart_example/cocotb_env/lib/python3.10/site-packages/pip (python 3.10)
+Collecting cocotb
+  Downloading cocotb-1.9.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.2/4.2 MB 39.3 MB/s eta 0:00:00
+Requirement already satisfied: find-libpython in ./cocotb_env/lib/python3.10/site-packages (from cocotb) (0.4.1)
+Installing collected packages: cocotb
+  changing mode of /home/admin/project/fault-injection-verif/uart_example/cocotb_env/bin/cocotb-config to 775
+Successfully installed cocotb-1.9.2

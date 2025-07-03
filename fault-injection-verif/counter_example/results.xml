@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1749809912" />
+    <testcase name="counter_test" classname="up_down_counter_tb" file="/home/veddesh/cocotb-new-version-tool/up_down_counter_tb.py" lineno="12" time="0.0033216476440429688" sim_time_ns="350.001" ratio_time="105369.69525581395" />
+  </testsuite>
+</testsuites>

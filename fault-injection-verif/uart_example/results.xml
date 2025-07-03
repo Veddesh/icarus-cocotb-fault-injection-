@@ -1,0 +1,9 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1751544755" />
+    <testcase name="uart_tx_test" classname="test_uart" file="/home/admin/project/fault-injection-verif/uart_example/test_uart.py" lineno="38" time="0.04681515693664551" sim_time_ns="8740.001" ratio_time="186691.69499586977" />
+    <testcase name="uart_rx_test" classname="test_uart" file="/home/admin/project/fault-injection-verif/uart_example/test_uart.py" lineno="78" time="0.05092978477478027" sim_time_ns="9760.001" ratio_time="191636.40771623715" />
+    <testcase name="uart_tx_test_with_fault" classname="test_uart" file="/home/admin/project/fault-injection-verif/uart_example/test_uart.py" lineno="124" time="0.061864614486694336" sim_time_ns="8740.001" ratio_time="141276.25416432158" />
+    <testcase name="uart_rx_test_with_fault" classname="test_uart" file="/home/admin/project/fault-injection-verif/uart_example/test_uart.py" lineno="179" time="0.05449819564819336" sim_time_ns="9760.001" ratio_time="179088.51630620085" />
+  </testsuite>
+</testsuites>

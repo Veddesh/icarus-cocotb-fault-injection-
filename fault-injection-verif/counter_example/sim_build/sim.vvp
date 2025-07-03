@@ -1,0 +1,63 @@
+#! /usr/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x5619eb825510 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x5619eb8256a0 .scope module, "up_down_counter" "up_down_counter" 3 3;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 1 "rst";
+    .port_info 2 /INPUT 1 "up";
+    .port_info 3 /OUTPUT 4 "count";
+o0x7f399f9ed018 .functor BUFZ 1, C4<z>; HiZ drive
+v0x5619eb84c450_0 .net "clk", 0 0, o0x7f399f9ed018;  0 drivers
+v0x5619eb86f200_0 .var "count", 3 0;
+o0x7f399f9ed078 .functor BUFZ 1, C4<z>; HiZ drive
+v0x5619eb86f2e0_0 .net "rst", 0 0, o0x7f399f9ed078;  0 drivers
+o0x7f399f9ed0a8 .functor BUFZ 1, C4<z>; HiZ drive
+v0x5619eb86f3b0_0 .net "up", 0 0, o0x7f399f9ed0a8;  0 drivers
+E_0x5619eb85e870 .event posedge, v0x5619eb86f2e0_0, v0x5619eb84c450_0;
+    .scope S_0x5619eb8256a0;
+T_0 ;
+    %wait E_0x5619eb85e870;
+    %load/vec4 v0x5619eb86f2e0_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.0, 8;
+    %pushi/vec4 0, 0, 4;
+    %assign/vec4 v0x5619eb86f200_0, 0;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0x5619eb86f3b0_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.2, 8;
+    %load/vec4 v0x5619eb86f200_0;
+    %addi 1, 0, 4;
+    %assign/vec4 v0x5619eb86f200_0, 0;
+    %jmp T_0.3;
+T_0.2 ;
+    %load/vec4 v0x5619eb86f200_0;
+    %subi 1, 0, 4;
+    %assign/vec4 v0x5619eb86f200_0, 0;
+T_0.3 ;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_0x5619eb8256a0;
+T_1 ;
+    %vpi_call/w 3 23 "$dumpfile", "sim_build/up_down_counter.vcd" {0 0 0};
+    %vpi_call/w 3 24 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x5619eb8256a0 {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/veddesh/cocotb-new-version-tool/up_down_counter.v";
