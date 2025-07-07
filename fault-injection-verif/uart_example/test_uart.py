@@ -111,6 +111,7 @@ async def start_fault_injection(dut):
     seugen = HierarchyFaultInjector(
         root=dut,
         exclude_names=["CLK", "RST_N"],
+	include_names=["uart_"],
         mttf_timer=BoundedRandomTimer(mttf_min=50, mttf_max=100, units="ns"),
         transient_duration_timer=BoundedRandomTimer(mttf_min=10, mttf_max=20, units="ns"),
         injection_strategy=RandomInjectionStrategy(),

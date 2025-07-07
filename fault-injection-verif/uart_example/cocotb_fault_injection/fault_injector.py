@@ -189,7 +189,7 @@ class FaultInjector:
 
 
 class HierarchyFaultInjector(FaultInjector):
-    def __init__(self, root, exclude_names=None, exclude_paths=None, exclude_modules=None, **kwargs):
+    def __init__(self, root, exclude_names=None, exclude_paths=None, exclude_modules=None, include_names=None, **kwargs):
         super().__init__(**kwargs)
         if self._disabled:
             return
@@ -197,6 +197,7 @@ class HierarchyFaultInjector(FaultInjector):
         self._exclude_names = "(" + ")|(".join(exclude_names or []) + ")" if exclude_names else "$^"
         self._exclude_paths = "(" + ")|(".join(exclude_paths or []) + ")" if exclude_paths else "$^"
         self._exclude_modules = exclude_modules or []
+        self._include_names = "(" + ")|(".join(include_names or []) + ")" if include_names else ".*"
 
         if isinstance(root, RegionObject):
             self._traverse_hierarchy(root)
@@ -212,18 +213,15 @@ class HierarchyFaultInjector(FaultInjector):
             if isinstance(handle, ModifiableObject):
                 if re.match(self._exclude_names, handle._name):
                     continue
+                if not re.match(self._include_names, handle._name):
+                    continue
 
-                self._log.debug(f"[DEBUG] Checking signal {handle._name} in module {mod_name}")
-
-                # Forcefully treat all signals as SEU candidates
                 self._seu_signals.append({
                     "handle": handle,
                     "ctrl_handles": [],
                     "type": "reg"
                 })
-
                 self._set_signals.append(handle)
-                self._seelog.debug(f"Module: {mod_name}, Signal: {handle._path} (forced SEU candidate)")
 
             elif isinstance(handle, RegionObject):
                 if handle.get_definition_name() not in self._exclude_modules:

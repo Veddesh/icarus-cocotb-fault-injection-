@@ -1,9 +1,9 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1751870131" />
-    <testcase name="uart_tx_test" classname="test_uart" file="/home/admin/project/fault-injection-verif/uart_example/test_uart.py" lineno="38" time="0.049608469009399414" sim_time_ns="8740.001" ratio_time="176179.61558829833" />
-    <testcase name="uart_rx_test" classname="test_uart" file="/home/admin/project/fault-injection-verif/uart_example/test_uart.py" lineno="78" time="0.05032777786254883" sim_time_ns="9760.001" ratio_time="193928.70924394333" />
-    <testcase name="uart_tx_test_with_fault" classname="test_uart" file="/home/admin/project/fault-injection-verif/uart_example/test_uart.py" lineno="124" time="0.13717293739318848" sim_time_ns="8740.001" ratio_time="63715.19897505671" />
-    <testcase name="uart_rx_test_with_fault" classname="test_uart" file="/home/admin/project/fault-injection-verif/uart_example/test_uart.py" lineno="179" time="0.0719764232635498" sim_time_ns="9760.001" ratio_time="135599.97228901822" />
+    <property name="random_seed" value="1751879749" />
+    <testcase name="uart_tx_test" classname="test_uart" file="/home/admin/project/icarus-cocotb-fault-injection-/fault-injection-verif/uart_example/test_uart.py" lineno="38" time="0.046715736389160156" sim_time_ns="8740.001" ratio_time="187089.01272993773" />
+    <testcase name="uart_rx_test" classname="test_uart" file="/home/admin/project/icarus-cocotb-fault-injection-/fault-injection-verif/uart_example/test_uart.py" lineno="78" time="0.050817012786865234" sim_time_ns="9760.001" ratio_time="192061.68298272515" />
+    <testcase name="uart_tx_test_with_fault" classname="test_uart" file="/home/admin/project/icarus-cocotb-fault-injection-/fault-injection-verif/uart_example/test_uart.py" lineno="125" time="0.05917978286743164" sim_time_ns="8740.001" ratio_time="147685.5874848077" />
+    <testcase name="uart_rx_test_with_fault" classname="test_uart" file="/home/admin/project/icarus-cocotb-fault-injection-/fault-injection-verif/uart_example/test_uart.py" lineno="180" time="0.06612372398376465" sim_time_ns="9760.001" ratio_time="147602.10726178053" />
   </testsuite>
 </testsuites>
