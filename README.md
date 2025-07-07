@@ -175,8 +175,8 @@ This project is derived from open-source work at CERN (TMRG cocotb_fault_injecti
 ## Contact
 
 For contributions, questions, or support:
-
-**Veddesh RGM**  
+```
+Veddesh RGM  
 Email: veddesh18@gmail.com  
 Institution: College of Engineering, Guindy  
 Focus: Fault Injection, Digital Verification, Space-grade Reliability
