@@ -114,7 +114,7 @@ async def start_fault_injection(dut):
         mttf_timer=BoundedRandomTimer(mttf_min=50, mttf_max=100, units="ns"),
         transient_duration_timer=BoundedRandomTimer(mttf_min=10, mttf_max=20, units="ns"),
         injection_strategy=RandomInjectionStrategy(),
-        injection_goal=TotalSEEs(20),
+        injection_goal=TotalSEEs(30),
         log_level=logging.INFO
     )
     cocotb.start_soon(seugen.start())

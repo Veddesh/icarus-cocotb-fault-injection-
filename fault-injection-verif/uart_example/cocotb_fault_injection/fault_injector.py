@@ -5,12 +5,11 @@ import re
 import cocotb
 from cocotb.handle import ModifiableObject, RegionObject, NonHierarchyIndexableObject
 from cocotb.handle import Force, Release
-from cocotb.triggers import GPITrigger, Timer
+from cocotb.triggers import Timer
 from cocotb.log import SimLog, SimLogFormatter, SimTimeContextFilter
 
 from .yosys_if import AnalyzedRTLDesign
-from .strategy import InjectionStrategy, _SET, _SEU, _SEE
-from .goal import InjectionGoal
+from .strategy import _SET, _SEU
 
 
 class FaultInjector:
@@ -125,8 +124,7 @@ class FaultInjector:
             elif isinstance(see, _SEU):
                 if len(see.signal_spec["handle"]) > self._max_signal_len:
                     continue
-                if all(int(h[0].value) != h[1] for h in see.signal_spec["ctrl_handles"]):
-                    seu_list.append(see)
+                seu_list.append(see)
 
         await self._mttf_timer
 
@@ -151,7 +149,6 @@ class FaultInjector:
         if self._name_handle:
             self._name_handle.value = see_id_str
 
-        # Only await transient reset if duration is defined
         if self._transient_duration_timer is not None:
             await self._transient_duration_timer
             for see in set_list:
@@ -164,6 +161,9 @@ class FaultInjector:
 
         self._injection_strategy.initialize(self._seu_signals, self._set_signals)
         self._log.info("Starting SEE injection.")
+        self._log.info("SEU candidates: %d, SET candidates: %d",
+                       len(self._seu_signals), len(self._set_signals))
+
         see_gen = iter(self._injection_strategy)
 
         while not self._injection_goal.eval(self._faults, len(self._seu_signals) + len(self._set_signals)) and self._running:
@@ -212,19 +212,18 @@ class HierarchyFaultInjector(FaultInjector):
             if isinstance(handle, ModifiableObject):
                 if re.match(self._exclude_names, handle._name):
                     continue
-                is_seq = False
-                if self._rtl:
-                    ff_info = [ff for ff in self._rtl.get_module_ff_info(mod_name) if ff["q"] == handle._name]
-                    if ff_info:
-                        is_seq = True
-                        ctrl_handles = [(getattr(hier, c[0]), c[1]) for c in ff_info[0]["ctrl"]]
-                        self._seu_signals.append({
-                            "handle": handle,
-                            "ctrl_handles": ctrl_handles.copy(),
-                            "type": "reg"
-                        })
+
+                self._log.debug(f"[DEBUG] Checking signal {handle._name} in module {mod_name}")
+
+                # Forcefully treat all signals as SEU candidates
+                self._seu_signals.append({
+                    "handle": handle,
+                    "ctrl_handles": [],
+                    "type": "reg"
+                })
+
                 self._set_signals.append(handle)
-                self._seelog.debug(f"Module: {mod_name}, Signal: {handle._path}, Seq: {int(is_seq)}")
+                self._seelog.debug(f"Module: {mod_name}, Signal: {handle._path} (forced SEU candidate)")
 
             elif isinstance(handle, RegionObject):
                 if handle.get_definition_name() not in self._exclude_modules:
